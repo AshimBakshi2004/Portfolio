@@ -54,6 +54,18 @@
     height: 100vh;
   }
 
+  /* Mobile Button Touch Fix */
+  .btn, button, .view-btn, .hamburger, #theme-toggle, #totop {
+    touch-action: manipulation !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    cursor: pointer !important;
+  }
+
   /* Loader */
   #loader {
     display: flex; align-items: center; justify-content: center;
@@ -71,7 +83,7 @@
 
   @keyframes spin { 100% { transform: rotate(360deg); } }
 
-  /* Header/Nav - IMPROVED MOBILE */
+  /* Header/Nav */
   header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -127,7 +139,7 @@
     flex-shrink: 0;
   }
 
-  /* Theme Toggle - MOBILE OPTIMIZED */
+  /* Theme Toggle */
   #theme-toggle {
     background: var(--glass);
     backdrop-filter: blur(8px);
@@ -165,7 +177,7 @@
     transform: rotate(360deg);
   }
 
-  /* Hamburger Menu - IMPROVED */
+  /* Hamburger Menu */
   .hamburger {
     display: none;
     background: var(--glass);
@@ -227,7 +239,9 @@
   }
 
   .nav-mobile a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 1.2rem 1rem;
     margin: 0.5rem 0;
     border-radius: 12px;
@@ -239,9 +253,6 @@
     color: var(--text);
     font-weight: 600;
     min-height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .nav-mobile a:hover, .nav-mobile a.active {
@@ -250,7 +261,7 @@
     transform: translateX(-5px);
   }
 
-  /* HERO - MOBILE IMPROVED */
+  /* HERO */
   #hero {
     padding: 120px 1rem 2rem;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -348,7 +359,7 @@
     justify-content: center;
     gap: 0.5rem;
     outline: none;
-    min-height: 44px;
+    min-height: 48px;
     white-space: nowrap;
   }
 
@@ -593,7 +604,7 @@
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     text-decoration: none;
-    min-height: 40px;
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -604,7 +615,7 @@
     box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
   }
 
-  /* Modal - MOBILE OPTIMIZED */
+  /* Modal */
   .modal {
     position: fixed; 
     inset: 0;
@@ -652,8 +663,8 @@
     transition: all 0.3s ease;
     padding: 5px;
     border-radius: 50%;
-    min-width: 32px;
-    min-height: 32px;
+    min-width: 44px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -665,7 +676,7 @@
     transform: scale(1.1);
   }
 
-  /* Education Timeline - MOBILE IMPROVED */
+  /* Education Timeline */
   #education {
     background: var(--glass);
     border-radius: var(--radius);
@@ -837,7 +848,6 @@
     box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
     z-index: 1000;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex;
     align-items: center;
     justify-content: center;
   }
@@ -878,12 +888,37 @@
     background: var(--glass);
   }
 
-  /* RESPONSIVE DESIGN - ENHANCED MOBILE */
+  /* Fix for link buttons */
+  a.btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+  }
+
+  /* RESPONSIVE DESIGN */
   @media (max-width: 768px) {
     :root {
       --h1: 2.2rem;
       --h2: 1.8rem;
       --h3: 1.1rem;
+    }
+
+    /* Ensure buttons are properly sized for touch */
+    .btn, button, .view-btn {
+      min-height: 48px !important;
+      min-width: 48px !important;
+      padding: 12px 16px !important;
+    }
+    
+    .hamburger, #theme-toggle {
+      min-height: 44px !important;
+      min-width: 44px !important;
+    }
+    
+    #totop {
+      min-height: 50px !important;
+      min-width: 50px !important;
     }
 
     header {
@@ -1008,6 +1043,7 @@
       width: 45px;
       height: 45px;
       font-size: 1.3rem;
+      display: none;
     }
 
     .timeline {
@@ -1455,7 +1491,7 @@ window.addEventListener('load', revealSections);
 // Typing animation
 const texts = [
   "Electronics & Telecom Student",
-  "Frontend Developer",
+  "Frontend Developer", 
   "Problem Solver",
   "Tech Enthusiast"
 ];
@@ -1463,6 +1499,8 @@ let textIndex = 0, charIndex = 0, isDeleting = false;
 
 function typeText() {
   const element = document.getElementById('typing');
+  if (!element) return;
+  
   const currentText = texts[textIndex];
   
   if (isDeleting) {
@@ -1494,16 +1532,16 @@ function createParticles() {
   const ctx = canvas.getContext('2d');
   
   const particles = [];
-  const particleCount = window.innerWidth < 768 ? 30 : 50;
+  const particleCount = window.innerWidth < 768 ? 20 : 40;
   
   for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 3 + 1,
-      speedX: (Math.random() - 0.5) * 2,
-      speedY: (Math.random() - 0.5) * 2,
-      opacity: Math.random() * 0.5 + 0.2
+      speedX: (Math.random() - 0.5) * 1.5,
+      speedY: (Math.random() - 0.5) * 1.5,
+      opacity: Math.random() * 0.4 + 0.2
     });
   }
   
@@ -1539,13 +1577,16 @@ function createParticles() {
 createParticles();
 window.addEventListener('resize', createParticles);
 
-// Mobile Navigation Control
+// Mobile Navigation Control - FIXED
 const hamburger = document.querySelector('.hamburger');
 const navMobile = document.getElementById('nav-mobile');
 const navOverlay = document.getElementById('nav-overlay');
 const hamburgerIcon = hamburger.querySelector('i');
 
-function toggleMobileNav() {
+function toggleMobileNav(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  
   const isOpen = navMobile.classList.contains('open');
   
   if (isOpen) {
@@ -1571,31 +1612,29 @@ function closeMobileNav() {
   document.body.style.overflow = 'auto';
 }
 
-// Event Listeners
-hamburger.addEventListener('click', toggleMobileNav);
-navOverlay.addEventListener('click', closeMobileNav);
+// FIXED Event Listeners for Mobile
+if (hamburger) {
+  hamburger.addEventListener('click', toggleMobileNav);
+  hamburger.addEventListener('touchstart', toggleMobileNav);
+}
 
-// Close mobile nav when clicking on links
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeMobileNav);
+  navOverlay.addEventListener('touchstart', closeMobileNav);
+}
+
+// Close mobile nav when clicking on links - FIXED
 document.querySelectorAll('.nav-mobile a').forEach(link => {
-  link.addEventListener('click', () => {
+  link.addEventListener('click', (e) => {
     closeMobileNav();
+  });
+  link.addEventListener('touchstart', (e) => {
+    // Allow the link to work
+    setTimeout(closeMobileNav, 100);
   });
 });
 
-// Close mobile nav on escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeMobileNav();
-    document.getElementById('modal').classList.remove('active');
-  }
-});
-
-// Prevent mobile nav close when clicking inside nav
-navMobile.addEventListener('click', (e) => {
-  e.stopPropagation();
-});
-
-// Theme Toggle
+// Theme Toggle - FIXED
 function setTheme(theme) {
   document.body.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
@@ -1618,10 +1657,23 @@ const savedTheme = localStorage.getItem('theme') ||
   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 setTheme(savedTheme);
 
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  const currentTheme = document.body.getAttribute('data-theme');
-  setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-});
+// FIXED Theme Toggle Events
+const themeToggle = document.getElementById('theme-toggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const currentTheme = document.body.getAttribute('data-theme');
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+  
+  themeToggle.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const currentTheme = document.body.getAttribute('data-theme');
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+}
 
 // Navigation Highlighting
 function highlightActiveNav() {
@@ -1680,7 +1732,7 @@ function staggerProjectCards() {
 
 window.addEventListener('scroll', staggerProjectCards);
 
-// Modal functionality
+// Modal functionality - FIXED
 const projectData = [
   {
     title: "AI-Powered Robotics System",
@@ -1689,7 +1741,7 @@ const projectData = [
     features: ["Autonomous Navigation", "Obstacle Detection", "Machine Learning", "Real-time Processing"],
   },
   {
-    title: "LibNest - Library Management System",
+    title: "LibNest - Library Management System", 
     description: "Modern, full-stack library management platform with intuitive user interface, real-time inventory tracking, and comprehensive analytics dashboard. Built for scalability and ease of use.",
     technologies: ["React", "Node.js", "MongoDB", "Express", "JWT"],
     features: ["User Management", "Inventory Tracking", "Analytics Dashboard", "Real-time Updates"],
@@ -1720,8 +1772,12 @@ const projectData = [
   }
 ];
 
+// FIXED Modal Events
 document.querySelectorAll('.view-btn').forEach((btn, index) => {
-  btn.addEventListener('click', () => {
+  const handleModal = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     const project = projectData[index] || {
       title: "Project Details",
       description: "Detailed information about this project will be available soon.",
@@ -1748,17 +1804,37 @@ document.querySelectorAll('.view-btn').forEach((btn, index) => {
     `;
     
     modal.classList.add('active');
-  });
+    
+    // Add event listeners to the new close button
+    const closeBtn = content.querySelector('.modal-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+      closeBtn.addEventListener('touchstart', () => {
+        modal.classList.remove('active');
+      });
+    }
+  };
+  
+  btn.addEventListener('click', handleModal);
+  btn.addEventListener('touchstart', handleModal);
 });
 
-// Close modal
+// Close modal - FIXED
 document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('modal') || e.target.classList.contains('modal-close') || e.target.closest('.modal-close')) {
+  if (e.target.classList.contains('modal')) {
     document.getElementById('modal').classList.remove('active');
   }
 });
 
-// Back to top button
+document.addEventListener('touchstart', (e) => {
+  if (e.target.classList.contains('modal')) {
+    document.getElementById('modal').classList.remove('active');
+  }
+});
+
+// Back to top button - FIXED
 const backToTop = document.getElementById('totop');
 
 window.addEventListener('scroll', () => {
@@ -1769,19 +1845,51 @@ window.addEventListener('scroll', () => {
   }
 });
 
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+if (backToTop) {
+  backToTop.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  
+  backToTop.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// FIXED Hero Buttons
+document.querySelectorAll('.hero-btns .btn').forEach(btn => {
+  btn.addEventListener('touchstart', function(e) {
+    // Allow default behavior for links
+    if (this.href) {
+      return true;
+    }
+  });
 });
 
-// Prevent zoom on double tap for iOS
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function (event) {
-    const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-    }
-    lastTouchEnd = now;
-}, false);
+// Keyboard navigation - FIXED
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeMobileNav();
+    document.getElementById('modal').classList.remove('active');
+  }
+});
+
+// Additional mobile button fixes
+document.addEventListener('DOMContentLoaded', () => {
+  // Ensure all buttons are properly clickable on mobile
+  const allButtons = document.querySelectorAll('button, .btn, .view-btn');
+  
+  allButtons.forEach(button => {
+    button.style.touchAction = 'manipulation';
+    button.style.webkitTouchCallout = 'none';
+    button.style.webkitUserSelect = 'none';
+    button.style.userSelect = 'none';
+  });
+  
+  // Fix for iOS Safari button highlighting
+  document.addEventListener('touchstart', () => {}, true);
+});
 </script>
 </body>
 </html>
