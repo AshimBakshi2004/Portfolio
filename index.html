@@ -12,11 +12,12 @@
   :root {
     --accent: #06b6d4;
     --accent2: #7c3aed;
-    --dark-bg: #181925;
     --light-bg: #fcfcfe;
+    --dark-bg: #181925;
     --glass: rgba(255,255,255,0.65);
     --glass-dark: rgba(34,37,53,0.80);
     --text: #23272f;
+    --text-dark: #f7fafc;
     --card-shadow: 0 10px 30px 0 rgba(31,38,135,0.13);
     --radius: 16px;
     --duration: 0.50s;
@@ -27,10 +28,24 @@
     --font-display: 'Space Grotesk', 'Montserrat', sans-serif;
   }
 
+  /* Light theme (default) */
+  body,
+  html[data-theme="light"],
+  body[data-theme="light"] {
+    background: var(--light-bg);
+    color: var(--text);
+    --glass: rgba(255,255,255,0.65);
+  }
+
+  /* Dark theme */
+  html[data-theme="dark"],
+  body[data-theme="dark"],
   [data-theme="dark"] {
-    --light-bg: var(--dark-bg);
-    --text: #f7fafc;
+    background: var(--dark-bg) !important;
+    color: var(--text-dark) !important;
     --glass: var(--glass-dark);
+    --text: var(--text-dark);
+    --light-bg: var(--dark-bg);
     --card-shadow: 0 10px 30px 0 rgba(0,0,0,0.4);
   }
 
@@ -54,7 +69,7 @@
     height: 100vh;
   }
 
-  /* Mobile Button Touch Fix */
+  /* Desktop & Mobile Button Fix */
   .btn, button, .view-btn, .hamburger, #theme-toggle, #totop {
     touch-action: manipulation !important;
     -webkit-touch-callout: none !important;
@@ -64,6 +79,8 @@
     user-select: none !important;
     -webkit-tap-highlight-color: transparent !important;
     cursor: pointer !important;
+    outline: none !important;
+    border: none !important;
   }
 
   /* Loader */
@@ -123,6 +140,7 @@
     transition: all 0.3s ease;
     position: relative;
     white-space: nowrap;
+    cursor: pointer;
   }
 
   nav a.active, nav a:hover {
@@ -139,17 +157,17 @@
     flex-shrink: 0;
   }
 
-  /* Theme Toggle */
+  /* Theme Toggle - FIXED */
   #theme-toggle {
     background: var(--glass);
     backdrop-filter: blur(8px);
-    border: 2px solid rgba(124, 58, 237, 0.2);
+    border: 2px solid rgba(124, 58, 237, 0.2) !important;
     border-radius: 25px;
     padding: 0.6rem 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    cursor: pointer;
+    cursor: pointer !important;
     font-size: 0.9rem;
     color: var(--accent2);
     font-weight: 600;
@@ -160,6 +178,9 @@
     min-width: 44px;
     min-height: 44px;
     justify-content: center;
+    outline: none !important;
+    touch-action: manipulation !important;
+    user-select: none !important;
   }
 
   #theme-toggle:hover {
@@ -171,6 +192,7 @@
   #theme-toggle i {
     font-size: 1rem;
     transition: transform 0.3s ease;
+    pointer-events: none;
   }
 
   #theme-toggle:hover i {
@@ -181,7 +203,7 @@
   .hamburger {
     display: none;
     background: var(--glass);
-    border: 2px solid rgba(124, 58, 237, 0.2);
+    border: 2px solid rgba(124, 58, 237, 0.2) !important;
     border-radius: 8px;
     padding: 0.6rem;
     font-size: 1.2rem;
@@ -253,6 +275,7 @@
     color: var(--text);
     font-weight: 600;
     min-height: 48px;
+    cursor: pointer;
   }
 
   .nav-mobile a:hover, .nav-mobile a.active {
@@ -343,7 +366,7 @@
   .btn {
     background: linear-gradient(90deg, var(--accent), var(--accent2));
     color: #fff;
-    border: none;
+    border: none !important;
     border-radius: 30px;
     font-size: 1rem;
     font-weight: 700;
@@ -358,7 +381,7 @@
     align-items: center; 
     justify-content: center;
     gap: 0.5rem;
-    outline: none;
+    outline: none !important;
     min-height: 48px;
     white-space: nowrap;
   }
@@ -512,8 +535,10 @@
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   .project-card {
@@ -596,7 +621,7 @@
     align-self: flex-start;
     background: linear-gradient(90deg, var(--accent2), var(--accent));
     color: #fff; 
-    border: none; 
+    border: none !important; 
     border-radius: 25px;
     padding: 10px 20px;
     font-weight: 700; 
@@ -608,6 +633,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none !important;
   }
 
   .view-btn:hover { 
@@ -659,7 +685,7 @@
     color: #999;
     cursor: pointer;
     background: none; 
-    border: none;
+    border: none !important;
     transition: all 0.3s ease;
     padding: 5px;
     border-radius: 50%;
@@ -668,6 +694,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none !important;
   }
 
   .modal-close:hover { 
@@ -839,7 +866,7 @@
     bottom: 1.5rem;
     background: var(--accent2);
     color: #fff;
-    border: none;
+    border: none !important;
     font-size: 1.5rem;
     border-radius: 50%;
     width: 50px; 
@@ -850,6 +877,7 @@
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     align-items: center;
     justify-content: center;
+    outline: none !important;
   }
 
   #totop:hover { 
@@ -869,9 +897,29 @@
     border-radius: var(--radius) var(--radius) 0 0;
   }
 
-  [data-theme="dark"] footer { 
-    background: rgba(34, 37, 53, 0.8); 
-    color: #ccc; 
+  /* Ensure dark theme styles apply to all elements */
+  [data-theme="dark"] .section,
+  [data-theme="dark"] .skill-type,
+  [data-theme="dark"] .project-card,
+  [data-theme="dark"] .contact-item,
+  [data-theme="dark"] .modal-content,
+  [data-theme="dark"] .timeline-item,
+  [data-theme="dark"] .certifications {
+    background: var(--glass-dark) !important;
+    color: var(--text-dark) !important;
+  }
+
+  [data-theme="dark"] footer {
+    background: rgba(34, 37, 53, 0.8) !important;
+    color: #ccc !important;
+  }
+
+  [data-theme="dark"] .card-desc {
+    color: #a0a0a0 !important;
+  }
+
+  [data-theme="dark"] .bar-title {
+    color: var(--text-dark) !important;
   }
 
   /* Custom Scrollbar */
@@ -1157,59 +1205,6 @@
       margin: 0.5rem;
     }
   }
-
-  @media (max-width: 360px) {
-    :root {
-      --h1: 1.6rem;
-      --h2: 1.4rem;
-    }
-
-    .hero-btns {
-      gap: 0.6rem;
-    }
-
-    .btn {
-      padding: 12px 16px;
-      font-size: 0.9rem;
-    }
-
-    .contact-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .skills-list li {
-      font-size: 0.85rem;
-      padding: 6px 12px;
-    }
-  }
-
-  /* Landscape Phone Fix */
-  @media (max-height: 500px) and (orientation: landscape) {
-    #hero {
-      min-height: 80vh;
-      padding: 80px 1rem 1rem;
-    }
-
-    .hero-img {
-      width: 100px;
-      height: 100px;
-    }
-
-    #hero h1 {
-      font-size: 1.5rem;
-    }
-
-    .hero-btns {
-      flex-direction: row;
-      gap: 0.5rem;
-    }
-
-    .btn {
-      width: auto;
-      padding: 10px 16px;
-      font-size: 0.85rem;
-    }
-  }
   </style>
 </head>
 
@@ -1230,7 +1225,7 @@
     </nav>
     
     <div class="header-controls">
-      <button id="theme-toggle">
+      <button id="theme-toggle" aria-label="Toggle theme">
         <i class="fa-solid fa-moon"></i>
         <span>Dark</span>
       </button>
@@ -1309,7 +1304,7 @@
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Projects Section - ONLY 2 PROJECTS -->
   <section id="projects" class="section">
     <div class="section-title">Featured Projects</div>
     <div class="projects-grid">
@@ -1333,50 +1328,6 @@
             <span class="tech">React</span><span class="tech">Node.js</span><span class="tech">MongoDB</span><span class="tech">Express</span>
           </div>
           <button class="view-btn" data-modal="1">View Details</button>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-img" src="Chat.jpg" alt="Chat App">
-        <div class="card-content">
-          <div class="card-title">Real-Time Chat Application</div>
-          <div class="card-desc">Feature-rich chat platform with group messaging, file sharing, and real-time notifications.</div>
-          <div class="tech-tags">
-            <span class="tech">Socket.io</span><span class="tech">Node.js</span><span class="tech">MongoDB</span><span class="tech">JWT</span>
-          </div>
-          <button class="view-btn" data-modal="2">View Details</button>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-img" src="Eco.png" alt="E-commerce">
-        <div class="card-content">
-          <div class="card-title">E-Commerce Platform</div>
-          <div class="card-desc">Full-featured online store with payment integration, inventory management, and admin dashboard.</div>
-          <div class="tech-tags">
-            <span class="tech">MERN Stack</span><span class="tech">Stripe</span><span class="tech">Redux</span><span class="tech">AWS</span>
-          </div>
-          <button class="view-btn" data-modal="3">View Details</button>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-img" src="ML.jpg" alt="ML Model">
-        <div class="card-content">
-          <div class="card-title">Stock Price Predictor</div>
-          <div class="card-desc">Machine learning model for stock market analysis with interactive visualization dashboard.</div>
-          <div class="tech-tags">
-            <span class="tech">Python</span><span class="tech">TensorFlow</span><span class="tech">Pandas</span><span class="tech">Flask</span>
-          </div>
-          <button class="view-btn" data-modal="4">View Details</button>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-img" src="Data.jpg" alt="Data Analysis">
-        <div class="card-content">
-          <div class="card-title">Business Intelligence Dashboard</div>
-          <div class="card-desc">Comprehensive data analysis tool with interactive charts and automated reporting capabilities.</div>
-          <div class="tech-tags">
-            <span class="tech">Python</span><span class="tech">Plotly</span><span class="tech">Pandas</span><span class="tech">Dash</span>
-          </div>
-          <button class="view-btn" data-modal="5">View Details</button>
         </div>
       </div>
     </div>
@@ -1463,6 +1414,8 @@
   </footer>
 
 <script>
+// FIXED JavaScript with Working Light/Dark Mode Toggle
+
 // Loader
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
@@ -1472,6 +1425,90 @@ window.addEventListener('DOMContentLoaded', () => {
       document.body.classList.remove('loading');
     }, 800);
   }, 1200);
+});
+
+// Theme Toggle - COMPLETELY FIXED VERSION
+function setTheme(theme) {
+  // Update the data-theme attribute on both html and body
+  document.documentElement.setAttribute('data-theme', theme);
+  document.body.setAttribute('data-theme', theme);
+  
+  // Save to localStorage with error handling
+  try {
+    localStorage.setItem('theme', theme);
+  } catch (e) {
+    console.warn('Could not save theme to localStorage:', e);
+  }
+  
+  // Update the theme toggle button
+  const toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    const icon = toggle.querySelector('i');
+    const text = toggle.querySelector('span');
+    
+    if (theme === 'dark') {
+      icon.className = 'fa-solid fa-sun';
+      if (text) text.textContent = 'Light';
+      toggle.setAttribute('aria-label', 'Switch to light mode');
+    } else {
+      icon.className = 'fa-solid fa-moon';
+      if (text) text.textContent = 'Dark';
+      toggle.setAttribute('aria-label', 'Switch to dark mode');
+    }
+  }
+}
+
+// Initialize theme on page load
+function initializeTheme() {
+  let savedTheme = 'light'; // default
+  
+  try {
+    savedTheme = localStorage.getItem('theme');
+  } catch (e) {
+    console.warn('Could not read theme from localStorage:', e);
+  }
+  
+  // If no saved theme, check system preference
+  if (!savedTheme) {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      savedTheme = 'dark';
+    } else {
+      savedTheme = 'light';
+    }
+  }
+  
+  setTheme(savedTheme);
+}
+
+// Theme toggle event handler
+function handleThemeToggle(e) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  setTheme(newTheme);
+}
+
+// Set up theme toggle when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize theme first
+  initializeTheme();
+  
+  // Set up theme toggle button
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    // Add single click event listener
+    themeToggle.addEventListener('click', handleThemeToggle);
+    
+    // For mobile devices, also add touchend event
+    themeToggle.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      handleThemeToggle(e);
+    });
+  }
 });
 
 // Section reveal animation
@@ -1577,15 +1614,17 @@ function createParticles() {
 createParticles();
 window.addEventListener('resize', createParticles);
 
-// Mobile Navigation Control - FIXED
+// Mobile Navigation Control
 const hamburger = document.querySelector('.hamburger');
 const navMobile = document.getElementById('nav-mobile');
 const navOverlay = document.getElementById('nav-overlay');
 const hamburgerIcon = hamburger.querySelector('i');
 
 function toggleMobileNav(e) {
-  e.preventDefault();
-  e.stopPropagation();
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   
   const isOpen = navMobile.classList.contains('open');
   
@@ -1612,10 +1651,13 @@ function closeMobileNav() {
   document.body.style.overflow = 'auto';
 }
 
-// FIXED Event Listeners for Mobile
+// Event Listeners for Mobile Nav
 if (hamburger) {
   hamburger.addEventListener('click', toggleMobileNav);
-  hamburger.addEventListener('touchstart', toggleMobileNav);
+  hamburger.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    toggleMobileNav(e);
+  });
 }
 
 if (navOverlay) {
@@ -1623,57 +1665,26 @@ if (navOverlay) {
   navOverlay.addEventListener('touchstart', closeMobileNav);
 }
 
-// Close mobile nav when clicking on links - FIXED
+// Close mobile nav when clicking on links
 document.querySelectorAll('.nav-mobile a').forEach(link => {
   link.addEventListener('click', (e) => {
     closeMobileNav();
   });
   link.addEventListener('touchstart', (e) => {
-    // Allow the link to work
     setTimeout(closeMobileNav, 100);
   });
 });
 
-// Theme Toggle - FIXED
-function setTheme(theme) {
-  document.body.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  
-  const toggle = document.getElementById('theme-toggle');
-  const icon = toggle.querySelector('i');
-  const text = toggle.querySelector('span');
-  
-  if (theme === 'dark') {
-    icon.className = 'fa-solid fa-sun';
-    if (text) text.textContent = 'Light';
-  } else {
-    icon.className = 'fa-solid fa-moon';
-    if (text) text.textContent = 'Dark';
-  }
-}
-
-// Initialize theme
-const savedTheme = localStorage.getItem('theme') || 
-  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-setTheme(savedTheme);
-
-// FIXED Theme Toggle Events
-const themeToggle = document.getElementById('theme-toggle');
-if (themeToggle) {
-  themeToggle.addEventListener('click', (e) => {
+// Desktop Navigation
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    const currentTheme = document.body.getAttribute('data-theme');
-    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
   });
-  
-  themeToggle.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const currentTheme = document.body.getAttribute('data-theme');
-    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-  });
-}
+});
 
 // Navigation Highlighting
 function highlightActiveNav() {
@@ -1732,7 +1743,7 @@ function staggerProjectCards() {
 
 window.addEventListener('scroll', staggerProjectCards);
 
-// Modal functionality - FIXED
+// Modal functionality - FOR 2 PROJECTS ONLY
 const projectData = [
   {
     title: "AI-Powered Robotics System",
@@ -1745,38 +1756,16 @@ const projectData = [
     description: "Modern, full-stack library management platform with intuitive user interface, real-time inventory tracking, and comprehensive analytics dashboard. Built for scalability and ease of use.",
     technologies: ["React", "Node.js", "MongoDB", "Express", "JWT"],
     features: ["User Management", "Inventory Tracking", "Analytics Dashboard", "Real-time Updates"],
-  },
-  {
-    title: "Real-Time Chat Application",
-    description: "Feature-rich chat platform with group messaging, file sharing, and real-time notifications. Built with Socket.io for instant communication and MongoDB for message persistence.",
-    technologies: ["Socket.io", "Node.js", "MongoDB", "Express", "JWT"],
-    features: ["Group Messaging", "File Sharing", "Real-time Notifications", "User Authentication"],
-  },
-  {
-    title: "E-Commerce Platform",
-    description: "Full-featured online store with payment integration, inventory management, and admin dashboard. Built with MERN stack for scalability and performance.",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe", "Redux"],
-    features: ["Payment Integration", "Inventory Management", "Admin Dashboard", "User Analytics"],
-  },
-  {
-    title: "Stock Price Predictor",
-    description: "Machine learning model for stock market analysis with interactive visualization dashboard. Uses TensorFlow and advanced algorithms for accurate predictions.",
-    technologies: ["Python", "TensorFlow", "Pandas", "Flask", "Plotly"],
-    features: ["ML Predictions", "Interactive Charts", "Data Analysis", "Real-time Updates"],
-  },
-  {
-    title: "Business Intelligence Dashboard",
-    description: "Comprehensive data analysis tool with interactive charts and automated reporting capabilities. Built with Python and modern visualization libraries.",
-    technologies: ["Python", "Plotly", "Pandas", "Dash", "SQL"],
-    features: ["Interactive Charts", "Automated Reports", "Data Visualization", "Custom Analytics"],
   }
 ];
 
-// FIXED Modal Events
+// Modal Events
 document.querySelectorAll('.view-btn').forEach((btn, index) => {
   const handleModal = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     
     const project = projectData[index] || {
       title: "Project Details",
@@ -1808,33 +1797,37 @@ document.querySelectorAll('.view-btn').forEach((btn, index) => {
     // Add event listeners to the new close button
     const closeBtn = content.querySelector('.modal-close');
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
+      const handleClose = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
         modal.classList.remove('active');
-      });
-      closeBtn.addEventListener('touchstart', () => {
-        modal.classList.remove('active');
-      });
+      };
+      
+      closeBtn.addEventListener('click', handleClose);
+      closeBtn.addEventListener('touchstart', handleClose);
     }
   };
   
   btn.addEventListener('click', handleModal);
-  btn.addEventListener('touchstart', handleModal);
+  btn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    handleModal(e);
+  });
 });
 
-// Close modal - FIXED
-document.addEventListener('click', (e) => {
+// Close modal
+const handleModalClose = (e) => {
   if (e.target.classList.contains('modal')) {
     document.getElementById('modal').classList.remove('active');
   }
-});
+};
 
-document.addEventListener('touchstart', (e) => {
-  if (e.target.classList.contains('modal')) {
-    document.getElementById('modal').classList.remove('active');
-  }
-});
+document.addEventListener('click', handleModalClose);
+document.addEventListener('touchstart', handleModalClose);
 
-// Back to top button - FIXED
+// Back to top button
 const backToTop = document.getElementById('totop');
 
 window.addEventListener('scroll', () => {
@@ -1846,28 +1839,38 @@ window.addEventListener('scroll', () => {
 });
 
 if (backToTop) {
-  backToTop.addEventListener('click', (e) => {
-    e.preventDefault();
+  const handleBackToTop = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  
-  backToTop.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  };
+
+  backToTop.addEventListener('click', handleBackToTop);
+  backToTop.addEventListener('touchstart', handleBackToTop);
 }
 
-// FIXED Hero Buttons
+// Hero Buttons
 document.querySelectorAll('.hero-btns .btn').forEach(btn => {
   btn.addEventListener('touchstart', function(e) {
-    // Allow default behavior for links
     if (this.href) {
-      return true;
+      return;
+    }
+  });
+  
+  btn.addEventListener('click', function(e) {
+    if (this.href && this.href.startsWith('#')) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   });
 });
 
-// Keyboard navigation - FIXED
+// Keyboard navigation
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeMobileNav();
@@ -1875,20 +1878,16 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Additional mobile button fixes
+// Additional fixes for all buttons
 document.addEventListener('DOMContentLoaded', () => {
-  // Ensure all buttons are properly clickable on mobile
-  const allButtons = document.querySelectorAll('button, .btn, .view-btn');
+  // Ensure all interactive elements work properly
+  const allInteractiveElements = document.querySelectorAll('button, .btn, .view-btn, a[href^="#"]');
   
-  allButtons.forEach(button => {
-    button.style.touchAction = 'manipulation';
-    button.style.webkitTouchCallout = 'none';
-    button.style.webkitUserSelect = 'none';
-    button.style.userSelect = 'none';
+  allInteractiveElements.forEach(element => {
+    element.style.cursor = 'pointer';
+    element.addEventListener('dragstart', (e) => e.preventDefault());
+    element.addEventListener('selectstart', (e) => e.preventDefault());
   });
-  
-  // Fix for iOS Safari button highlighting
-  document.addEventListener('touchstart', () => {}, true);
 });
 </script>
 </body>
