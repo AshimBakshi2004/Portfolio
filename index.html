@@ -34,6 +34,10 @@
     --card-shadow: 0 10px 30px 0 rgba(0,0,0,0.4);
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   html, body {
     margin: 0; padding: 0;
     font-family: var(--font-main);
@@ -42,6 +46,7 @@
     scroll-behavior: smooth;
     transition: background 0.4s, color 0.4s;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   body.loading {
@@ -66,7 +71,7 @@
 
   @keyframes spin { 100% { transform: rotate(360deg); } }
 
-  /* Header/Nav - FIXED VERSION */
+  /* Header/Nav - IMPROVED MOBILE */
   header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -77,8 +82,8 @@
     display: flex; 
     align-items: center; 
     justify-content: space-between;
-    padding: 0.8rem 2rem;
-    height: 70px;
+    padding: 1rem 2rem;
+    min-height: 70px;
   }
 
   .logo {
@@ -105,6 +110,7 @@
     border-radius: 20px;
     transition: all 0.3s ease;
     position: relative;
+    white-space: nowrap;
   }
 
   nav a.active, nav a:hover {
@@ -117,20 +123,20 @@
   .header-controls {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
     flex-shrink: 0;
   }
 
-  /* Fixed Theme Toggle */
+  /* Theme Toggle - MOBILE OPTIMIZED */
   #theme-toggle {
     background: var(--glass);
     backdrop-filter: blur(8px);
     border: 2px solid rgba(124, 58, 237, 0.2);
     border-radius: 25px;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
     cursor: pointer;
     font-size: 0.9rem;
     color: var(--accent2);
@@ -139,6 +145,9 @@
     transition: all 0.3s ease;
     position: relative;
     z-index: 1003;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
   }
 
   #theme-toggle:hover {
@@ -156,17 +165,21 @@
     transform: rotate(360deg);
   }
 
-  /* Hamburger Menu */
+  /* Hamburger Menu - IMPROVED */
   .hamburger {
     display: none;
     background: var(--glass);
     border: 2px solid rgba(124, 58, 237, 0.2);
     border-radius: 8px;
-    padding: 0.5rem;
+    padding: 0.6rem;
     font-size: 1.2rem;
     color: var(--accent2);
     cursor: pointer;
     transition: all 0.3s ease;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    align-items: center;
   }
 
   .hamburger:hover {
@@ -197,14 +210,14 @@
     top: 0;
     right: 0;
     height: 100vh;
-    width: 280px;
+    width: min(300px, 85vw);
     background: var(--glass);
     backdrop-filter: blur(15px);
     box-shadow: -10px 0 30px rgba(0,0,0,0.2);
     z-index: 2000;
     display: flex;
     flex-direction: column;
-    padding: 5rem 1.5rem 2rem;
+    padding: 6rem 2rem 2rem;
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
@@ -215,9 +228,9 @@
 
   .nav-mobile a {
     display: block;
-    padding: 1rem;
-    margin: 0.3rem 0;
-    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 12px;
     font-size: 1.1rem;
     text-align: center;
     background: rgba(255,255,255,0.1);
@@ -225,6 +238,10 @@
     text-decoration: none;
     color: var(--text);
     font-weight: 600;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-mobile a:hover, .nav-mobile a.active {
@@ -233,9 +250,9 @@
     transform: translateX(-5px);
   }
 
-  /* HERO */
+  /* HERO - MOBILE IMPROVED */
   #hero {
-    padding-top: 100px;
+    padding: 120px 1rem 2rem;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     min-height: 100vh;
     position: relative;
@@ -254,6 +271,7 @@
     display: flex; flex-direction: column; align-items: center;
     text-align: center;
     max-width: 620px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 1rem;
   }
@@ -277,13 +295,16 @@
     min-height: 2em;
     letter-spacing: .015em;
     margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
   }
 
   #hero p {
     font-size: 1.1rem;
     color: #417cff;
-    margin: 0 .5em 1.5em;
+    margin: 0 0 1.5em;
     line-height: 1.6;
+    max-width: 90%;
   }
 
   .hero-img {
@@ -292,7 +313,7 @@
     border: 4px solid var(--accent);
     box-shadow: 0 8px 40px #a5b4fc79;
     transition: transform 0.4s ease;
-    margin-top: 1.5rem;
+    margin: 1.5rem 0;
   }
 
   .hero-img:hover {
@@ -300,10 +321,12 @@
   }
 
   .hero-btns {
-    margin-top: 2rem;
-    display: flex; gap: 1rem;
+    margin-top: 1rem;
+    display: flex; 
+    gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
   }
 
   .btn {
@@ -322,8 +345,11 @@
     text-decoration: none;
     display: inline-flex; 
     align-items: center; 
+    justify-content: center;
     gap: 0.5rem;
     outline: none;
+    min-height: 44px;
+    white-space: nowrap;
   }
 
   .btn i { font-size: 1.1em; }
@@ -338,7 +364,7 @@
   .section {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 4rem 1.5rem;
     position: relative;
     opacity: 0;
     transform: translateY(50px);
@@ -372,7 +398,7 @@
 
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
   }
 
@@ -475,7 +501,7 @@
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
   }
 
@@ -527,6 +553,7 @@
     font-weight: 700;
     color: var(--accent2);
     margin-bottom: 0.5rem;
+    line-height: 1.3;
   }
 
   .card-desc {
@@ -566,6 +593,10 @@
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     text-decoration: none;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .view-btn:hover { 
@@ -573,7 +604,7 @@
     box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
   }
 
-  /* Modal */
+  /* Modal - MOBILE OPTIMIZED */
   .modal {
     position: fixed; 
     inset: 0;
@@ -581,7 +612,7 @@
     display: none; 
     place-items: center;
     z-index: 3000;
-    padding: 2rem;
+    padding: 1rem;
   }
 
   .modal.active { 
@@ -606,6 +637,7 @@
     color: var(--accent2); 
     margin: 0 0 1rem;
     font-family: var(--font-display);
+    line-height: 1.3;
   }
 
   .modal-close {
@@ -620,6 +652,11 @@
     transition: all 0.3s ease;
     padding: 5px;
     border-radius: 50%;
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .modal-close:hover { 
@@ -628,7 +665,7 @@
     transform: scale(1.1);
   }
 
-  /* Education Timeline */
+  /* Education Timeline - MOBILE IMPROVED */
   #education {
     background: var(--glass);
     border-radius: var(--radius);
@@ -687,6 +724,7 @@
     font-weight: 700; 
     color: var(--accent2);
     margin-bottom: 0.5rem;
+    line-height: 1.3;
   }
 
   /* Certifications */
@@ -694,7 +732,7 @@
     margin-top: 2rem;
     background: rgba(255,255,255,0.4);
     border-radius: 12px;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     backdrop-filter: blur(4px);
   }
 
@@ -749,6 +787,11 @@
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255,255,255,0.2);
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .contact-item:hover {
@@ -774,14 +817,15 @@
     color: inherit;
     text-decoration: none;
     font-weight: 600;
+    word-break: break-all;
   }
 
   /* Back to Top */
   #totop {
     display: none;
     position: fixed; 
-    right: 2rem; 
-    bottom: 2rem;
+    right: 1.5rem; 
+    bottom: 1.5rem;
     background: var(--accent2);
     color: #fff;
     border: none;
@@ -793,6 +837,9 @@
     box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
     z-index: 1000;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #totop:hover { 
@@ -807,7 +854,7 @@
     backdrop-filter: blur(8px);
     color: #666;
     text-align: center; 
-    padding: 2rem;
+    padding: 2rem 1rem;
     margin-top: 3rem;
     border-radius: var(--radius) var(--radius) 0 0;
   }
@@ -819,7 +866,7 @@
 
   /* Custom Scrollbar */
   ::-webkit-scrollbar { 
-    width: 8px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-thumb { 
@@ -831,11 +878,17 @@
     background: var(--glass);
   }
 
-  /* Responsive Design */
+  /* RESPONSIVE DESIGN - ENHANCED MOBILE */
   @media (max-width: 768px) {
+    :root {
+      --h1: 2.2rem;
+      --h2: 1.8rem;
+      --h3: 1.1rem;
+    }
+
     header {
-      padding: 0.8rem 1.5rem;
-      height: 65px;
+      padding: 1rem 1rem;
+      min-height: 65px;
     }
     
     .logo {
@@ -847,7 +900,7 @@
     }
     
     .hamburger {
-      display: block;
+      display: flex;
     }
     
     .nav-overlay {
@@ -859,40 +912,50 @@
     }
     
     #theme-toggle {
-      padding: 0.4rem 0.8rem;
+      padding: 0.5rem;
       font-size: 0.8rem;
     }
     
     #hero {
-      padding-top: 80px;
+      padding: 100px 1rem 2rem;
+      min-height: 90vh;
     }
 
     #hero h1 {
       font-size: 2rem;
+      line-height: 1.1;
     }
 
     #typing {
-      font-size: 1.1rem;
+      font-size: 1rem;
+      min-height: 1.5em;
     }
 
     #hero p {
       font-size: 1rem;
+      max-width: 100%;
     }
 
     .hero-img {
-      width: 140px;
-      height: 140px;
+      width: 130px;
+      height: 130px;
+      margin: 1rem 0;
     }
 
     .hero-btns {
       flex-direction: column;
       align-items: center;
       gap: 0.8rem;
+      width: 100%;
+      max-width: 300px;
     }
 
     .btn {
-      width: 200px;
+      width: 100%;
+      max-width: 250px;
       justify-content: center;
+      padding: 14px 20px;
+      font-size: 0.95rem;
     }
     
     .section {
@@ -900,7 +963,7 @@
     }
 
     .section-title {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       margin-bottom: 2rem;
     }
     
@@ -909,20 +972,34 @@
       gap: 1.5rem;
     }
 
+    .skill-type {
+      padding: 1.5rem 1.2rem;
+    }
+
     .projects-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
     }
 
     .contact-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 1rem;
+    }
+
+    .contact-item {
+      padding: 1.5rem 1rem;
+      min-height: 120px;
+    }
+
+    .contact-item i {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
     }
     
     .modal-content {
       margin: 1rem;
       padding: 1.5rem;
-      max-height: 70vh;
+      max-height: 75vh;
     }
     
     #totop {
@@ -932,12 +1009,36 @@
       height: 45px;
       font-size: 1.3rem;
     }
+
+    .timeline {
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item {
+      padding: 1.2rem 1.2rem 1.2rem 2.5rem;
+    }
+
+    .timeline-marker {
+      left: -1.7rem;
+      width: 18px;
+      height: 18px;
+      top: 1.2rem;
+    }
+
+    .certifications {
+      padding: 1.5rem 1.2rem;
+    }
   }
 
   @media (max-width: 480px) {
+    :root {
+      --h1: 1.9rem;
+      --h2: 1.6rem;
+    }
+
     header {
-      padding: 0.6rem 1rem;
-      height: 60px;
+      padding: 0.8rem 0.8rem;
+      min-height: 60px;
     }
 
     .logo {
@@ -949,16 +1050,37 @@
     }
     
     #theme-toggle {
-      padding: 0.3rem 0.6rem;
+      padding: 0.4rem;
+      min-width: 38px;
+      min-height: 38px;
+    }
+
+    .hamburger {
+      min-width: 38px;
+      min-height: 38px;
+      padding: 0.4rem;
     }
     
     .nav-mobile {
       width: 100vw;
-      padding: 4rem 2rem 2rem;
+      padding: 5rem 1.5rem 2rem;
     }
     
+    #hero {
+      padding: 90px 0.8rem 1.5rem;
+    }
+
     #hero h1 {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
+    }
+
+    #typing {
+      font-size: 0.95rem;
+    }
+
+    #hero p {
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
 
     .section {
@@ -966,12 +1088,90 @@
     }
 
     .hero-img {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
     }
 
     .contact-item {
-      padding: 1.5rem 1rem;
+      padding: 1.2rem 0.8rem;
+    }
+
+    .project-img {
+      height: 160px;
+    }
+
+    .card-content {
+      padding: 1.2rem;
+    }
+
+    .skill-type {
+      padding: 1.2rem;
+    }
+
+    .timeline-item {
+      padding: 1rem 1rem 1rem 2.2rem;
+    }
+
+    .certifications {
+      padding: 1.2rem 1rem;
+    }
+
+    .modal-content {
+      padding: 1.2rem;
+      margin: 0.5rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    :root {
+      --h1: 1.6rem;
+      --h2: 1.4rem;
+    }
+
+    .hero-btns {
+      gap: 0.6rem;
+    }
+
+    .btn {
+      padding: 12px 16px;
+      font-size: 0.9rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .skills-list li {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+  }
+
+  /* Landscape Phone Fix */
+  @media (max-height: 500px) and (orientation: landscape) {
+    #hero {
+      min-height: 80vh;
+      padding: 80px 1rem 1rem;
+    }
+
+    .hero-img {
+      width: 100px;
+      height: 100px;
+    }
+
+    #hero h1 {
+      font-size: 1.5rem;
+    }
+
+    .hero-btns {
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      width: auto;
+      padding: 10px 16px;
+      font-size: 0.85rem;
     }
   }
   </style>
@@ -1294,7 +1494,9 @@ function createParticles() {
   const ctx = canvas.getContext('2d');
   
   const particles = [];
-  for (let i = 0; i < 50; i++) {
+  const particleCount = window.innerWidth < 768 ? 30 : 50;
+  
+  for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -1337,7 +1539,7 @@ function createParticles() {
 createParticles();
 window.addEventListener('resize', createParticles);
 
-// Mobile Navigation Control - FIXED
+// Mobile Navigation Control
 const hamburger = document.querySelector('.hamburger');
 const navMobile = document.getElementById('nav-mobile');
 const navOverlay = document.getElementById('nav-overlay');
@@ -1393,7 +1595,7 @@ navMobile.addEventListener('click', (e) => {
   e.stopPropagation();
 });
 
-// Enhanced Theme Toggle
+// Theme Toggle
 function setTheme(theme) {
   document.body.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
@@ -1451,10 +1653,13 @@ window.addEventListener('load', highlightActiveNav);
 // Skill bars animation
 function animateSkillBars() {
   const skillSection = document.querySelector('#skills');
-  if (skillSection.getBoundingClientRect().top < window.innerHeight - 200) {
+  if (skillSection && skillSection.getBoundingClientRect().top < window.innerHeight - 200) {
     document.querySelectorAll('.bar-fg').forEach(bar => {
       const width = bar.getAttribute('data-width');
-      bar.style.width = width;
+      if (width && !bar.classList.contains('animated')) {
+        bar.style.width = width;
+        bar.classList.add('animated');
+      }
     });
   }
 }
@@ -1464,9 +1669,11 @@ window.addEventListener('scroll', animateSkillBars);
 // Project cards stagger animation
 function staggerProjectCards() {
   const projectSection = document.querySelector('#projects');
-  if (projectSection.getBoundingClientRect().top < window.innerHeight - 200) {
+  if (projectSection && projectSection.getBoundingClientRect().top < window.innerHeight - 200) {
     document.querySelectorAll('.project-card').forEach((card, index) => {
-      setTimeout(() => card.classList.add('visible'), index * 200);
+      if (!card.classList.contains('visible')) {
+        setTimeout(() => card.classList.add('visible'), index * 200);
+      }
     });
   }
 }
@@ -1480,48 +1687,36 @@ const projectData = [
     description: "Advanced autonomous robot featuring AI navigation, obstacle detection, and machine learning capabilities. Built with Arduino, Python, and computer vision libraries for intelligent decision-making and real-time environment interaction.",
     technologies: ["Python", "Arduino", "OpenCV", "TensorFlow", "Computer Vision"],
     features: ["Autonomous Navigation", "Obstacle Detection", "Machine Learning", "Real-time Processing"],
-    github: "",
-    demo: ""
   },
   {
     title: "LibNest - Library Management System",
     description: "Modern, full-stack library management platform with intuitive user interface, real-time inventory tracking, and comprehensive analytics dashboard. Built for scalability and ease of use.",
     technologies: ["React", "Node.js", "MongoDB", "Express", "JWT"],
     features: ["User Management", "Inventory Tracking", "Analytics Dashboard", "Real-time Updates"],
-    github: "",
-    demo: ""
   },
   {
     title: "Real-Time Chat Application",
     description: "Feature-rich chat platform with group messaging, file sharing, and real-time notifications. Built with Socket.io for instant communication and MongoDB for message persistence.",
     technologies: ["Socket.io", "Node.js", "MongoDB", "Express", "JWT"],
     features: ["Group Messaging", "File Sharing", "Real-time Notifications", "User Authentication"],
-    github: "",
-    demo: ""
   },
   {
     title: "E-Commerce Platform",
     description: "Full-featured online store with payment integration, inventory management, and admin dashboard. Built with MERN stack for scalability and performance.",
     technologies: ["React", "Node.js", "MongoDB", "Stripe", "Redux"],
     features: ["Payment Integration", "Inventory Management", "Admin Dashboard", "User Analytics"],
-    github: "",
-    demo: ""
   },
   {
     title: "Stock Price Predictor",
     description: "Machine learning model for stock market analysis with interactive visualization dashboard. Uses TensorFlow and advanced algorithms for accurate predictions.",
     technologies: ["Python", "TensorFlow", "Pandas", "Flask", "Plotly"],
     features: ["ML Predictions", "Interactive Charts", "Data Analysis", "Real-time Updates"],
-    github: "",
-    demo: ""
   },
   {
     title: "Business Intelligence Dashboard",
     description: "Comprehensive data analysis tool with interactive charts and automated reporting capabilities. Built with Python and modern visualization libraries.",
     technologies: ["Python", "Plotly", "Pandas", "Dash", "SQL"],
     features: ["Interactive Charts", "Automated Reports", "Data Visualization", "Custom Analytics"],
-    github: "",
-    demo: ""
   }
 ];
 
@@ -1568,7 +1763,7 @@ const backToTop = document.getElementById('totop');
 
 window.addEventListener('scroll', () => {
   if (window.scrollY > 300) {
-    backToTop.style.display = 'block';
+    backToTop.style.display = 'flex';
   } else {
     backToTop.style.display = 'none';
   }
@@ -1577,6 +1772,16 @@ window.addEventListener('scroll', () => {
 backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// Prevent zoom on double tap for iOS
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
 </script>
 </body>
 </html>
